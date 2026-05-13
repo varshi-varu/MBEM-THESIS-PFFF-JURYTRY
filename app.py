@@ -45,8 +45,20 @@ st.markdown("""
 /* Base — dark background, high contrast text */
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
+    font-size: 15px;
     color: #0D1B2A !important;
 }
+/* Streamlit default text */
+p, .stMarkdown p { font-size: 15px !important; line-height: 1.6 !important; }
+/* Labels */
+.stSelectbox label, .stSlider label, .stNumberInput label,
+.stCheckbox label, .stExpander label { font-size: 14px !important; font-weight: 600 !important; }
+/* Select box options */
+.stSelectbox div[data-baseweb="select"] { font-size: 14px !important; }
+/* Number input */
+.stNumberInput input { font-size: 15px !important; }
+/* Expander header */
+.streamlit-expanderHeader { font-size: 15px !important; font-weight: 600 !important; }
 .block-container {
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
@@ -82,29 +94,29 @@ h1, h2, h3, h4, h5, h6 {
 .kpi-box {
     background: #FFFFFF;
     border-radius: 10px;
-    padding: 16px 10px;
-    border-left: 5px solid #0D1B2A;
-    border: 1px solid #DEE2E6;
+    padding: 18px 12px;
+    border: 1.5px solid #DEE2E6;
     border-left: 5px solid;
     text-align: center;
     margin-bottom: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .kpi-val {
-    font-size: 2.1rem;
+    font-size: 2.3rem;
     font-weight: 800;
-    line-height: 1.2;
+    line-height: 1.15;
 }
 .kpi-lbl {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: #2D3748;   /* dark — visible on projector */
-    margin-top: 2px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #1A202C;
+    margin-top: 4px;
 }
 .kpi-sub {
-    font-size: 0.75rem;
-    color: #4A5568;
+    font-size: 0.82rem;
+    color: #2D3748;
     font-weight: 500;
+    margin-top: 2px;
 }
 
 /* ── SWITCHING VALUE CARDS ───────────────────────────────────────────── */
@@ -114,8 +126,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 14px 16px;
     margin: 6px 0;
     border-left: 5px solid #B7791F;
-    font-size: 0.95rem;
+    font-size: 1.0rem;
     color: #1A202C;
+    line-height: 1.7;
 }
 .sv-p50 {
     background: #FFF5F5;
@@ -123,8 +136,9 @@ h1, h2, h3, h4, h5, h6 {
     padding: 14px 16px;
     margin: 6px 0;
     border-left: 5px solid #C53030;
-    font-size: 0.95rem;
+    font-size: 1.0rem;
     color: #1A202C;
+    line-height: 1.7;
 }
 .sv-ok {
     background: #F0FFF4;
@@ -142,10 +156,10 @@ h1, h2, h3, h4, h5, h6 {
     border-left: 5px solid #2B6CB0;
     border-radius: 8px;
     padding: 14px 16px;
-    font-size: 0.92rem;
+    font-size: 1.0rem;
     color: #1A365D;
     margin: 8px 0;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 .bias-box {
     background: #FFF5F5;
@@ -153,7 +167,7 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     padding: 16px;
     margin: 10px 0;
-    font-size: 0.95rem;
+    font-size: 1.0rem;
     color: #1A202C;
 }
 .zs-box {
@@ -162,8 +176,9 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 10px;
     padding: 14px;
     margin: 10px 0;
-    font-size: 0.92rem;
+    font-size: 1.0rem;
     color: #1A202C;
+    line-height: 1.7;
 }
 
 /* ── SIDEBAR — readable text ─────────────────────────────────────────── */
@@ -174,7 +189,7 @@ section[data-testid="stSidebar"] .block-container {
     padding-top: 1rem;
 }
 section[data-testid="stSidebar"] label {
-    font-size: 0.88rem !important;
+    font-size: 0.95rem !important;
     font-weight: 600 !important;
     color: #1A202C !important;
 }
@@ -201,15 +216,15 @@ section[data-testid="stSidebar"] .stCaption {
 
 /* ── TABS — larger text ──────────────────────────────────────────────── */
 .stTabs [data-baseweb="tab"] {
-    font-size: 0.9rem !important;
+    font-size: 1.0rem !important;
     font-weight: 600 !important;
-    padding: 10px 18px !important;
+    padding: 12px 20px !important;
 }
 
 /* ── DATAFRAME — readable ────────────────────────────────────────────── */
 .dataframe td, .dataframe th {
-    font-size: 0.88rem !important;
-    padding: 8px 12px !important;
+    font-size: 0.92rem !important;
+    padding: 10px 14px !important;
 }
 
 /* ── VERDICT PILL ────────────────────────────────────────────────────── */
@@ -449,10 +464,12 @@ def _kpi(col, val, lbl, color, sub=""):
 _kpi(k1, f"{fi:.1f}%", "FI Primary", _fc(fi), _vt(fi))
 _kpi(k2, f"{res['fi_eirr']:.1f}%", "FI EIRR", _fc(res['fi_eirr']), "Hurdle 12%")
 fi_f = f"{res['fi_firr']:.1f}%" if not np.isnan(res['fi_firr']) else "N/A"
-_kpi(k3, fi_f, "FI FIRR", _fc(res['fi_firr']) if not np.isnan(res['fi_firr']) else "#6c757d", "Hurdle 10%")
+firr_sub = "Hurdle 10%" if not np.isnan(res['fi_firr']) else f"N/A — not for {sim_mode}"
+_kpi(k3, fi_f, "FI FIRR", _fc(res['fi_firr']) if not np.isnan(res['fi_firr']) else "#718096", firr_sub)
 fi_e = f"{res['fi_eq']:.1f}%" if not np.isnan(res['fi_eq']) else "N/A"
 eq_h = res.get('hurdle_eq')
-_kpi(k4, fi_e, "FI Equity", _fc(res['fi_eq']) if not np.isnan(res['fi_eq']) else "#6c757d", f"Hurdle {eq_h*100:.0f}%" if eq_h else "N/A")
+eq_sub = f"Hurdle {eq_h*100:.0f}%" if eq_h else f"N/A — not for {sim_mode}"
+_kpi(k4, fi_e, "FI Equity", _fc(res['fi_eq']) if not np.isnan(res['fi_eq']) else "#718096", eq_sub)
 _kpi(k5, f"{p50:.2f}%", "P50 EIRR", "#198754" if p50>=12 else "#842029", f"DPR: {p['dpr_eirr']:.2f}%")
 _kpi(k6, f"{bias_gap:+.2f}pp", "Optimism Bias", "#842029" if abs(bias_gap)>1 else "#198754", "DPR − P50 simulated")
 
@@ -475,60 +492,161 @@ tab1,tab2,tab3,tab_val,tab4,tab5 = st.tabs([
 # ─────────────────────────────────────────────────────────────────────
 with tab1:
     def _hist(arr, hurdle, color_hex, title, dpr_val=None):
+        """Histogram with NO annotation overlap + full legend."""
         valid = arr[~np.isnan(arr)]*100 if arr is not None else np.array([])
         if len(valid)<10:
-            f=go.Figure(); f.add_annotation(text=f"{title}<br>Not applicable for {sim_mode} mode",
-                xref="paper",yref="paper",x=0.5,y=0.5,showarrow=False,font=dict(size=13,color="#6c757d"))
-            f.update_layout(height=400,plot_bgcolor="white",paper_bgcolor="white",font=dict(family="Inter, sans-serif", size=13, color="#1A202C"),xaxis_visible=False,yaxis_visible=False)
+            f=go.Figure()
+            f.add_annotation(text=f"<b>{title}</b><br><br>Not applicable for <b>{sim_mode}</b> mode<br><br>"
+                             f"This IRR type requires a different procurement mode.<br>"
+                             f"Switch to HAM or BOT in the sidebar to see FIRR / Equity IRR.",
+                xref="paper",yref="paper",x=0.5,y=0.5,showarrow=False,
+                font=dict(size=14,color="#4A5568"),align="center")
+            f.update_layout(height=420,plot_bgcolor="#F7FAFC",paper_bgcolor="white",
+                font=dict(family="Inter, sans-serif",size=14,color="#1A202C"),
+                xaxis_visible=False,yaxis_visible=False)
             return f
         fi_v=np.sum(valid<hurdle*100)/len(valid)*100
         p20_,p50_,p80_=np.percentile(valid,20),np.percentile(valid,50),np.percentile(valid,80)
+        vmin, vmax = min(valid)-2, max(valid)+2
+        
         f=go.Figure()
-        f.add_vrect(x0=min(valid)-3,x1=hurdle*100,fillcolor=RGBA["red_fill"],line_width=0,
-                    annotation_text="Below hurdle",annotation_position="top left")
-        f.add_trace(go.Histogram(x=valid,nbinsx=55,name="Simulated",
-                                  marker_color=color_hex,marker_line=dict(color="white",width=0.4),opacity=0.85))
-        f.add_vline(x=hurdle*100,line_dash="dash",line_color="#DC3545",line_width=2.5,
-                    annotation_text=f"Hurdle {hurdle*100:.0f}%")
+        # Shaded "below hurdle" zone
+        f.add_vrect(x0=vmin,x1=hurdle*100,fillcolor=RGBA["red_fill"],line_width=0)
+        
+        # Histogram bars
+        f.add_trace(go.Histogram(x=valid,nbinsx=55,name="Simulated EIRR",
+                                  marker_color=color_hex,marker_line=dict(color="white",width=0.4),
+                                  opacity=0.85,hovertemplate="IRR: %{x:.1f}%<br>Count: %{y}<extra></extra>"))
+        
+        # Invisible scatter traces for LEGEND — this is the fix for no-legend problem
+        # Each line type gets a named legend entry
+        hurdle_pct = hurdle*100
+        f.add_trace(go.Scatter(x=[hurdle_pct,hurdle_pct],y=[0,0],mode="lines",
+            name=f"Hurdle ({hurdle_pct:.0f}%)",
+            line=dict(color="#C53030",width=2.5,dash="dash"),showlegend=True))
+        f.add_trace(go.Scatter(x=[p50_,p50_],y=[0,0],mode="lines",
+            name=f"P50 Simulated ({p50_:.1f}%)",
+            line=dict(color="#2B6CB0",width=2.5,dash="dot"),showlegend=True))
         if dpr_val:
-            f.add_vline(x=dpr_val,line_dash="solid",line_color="#212529",line_width=2,
-                        annotation_text=f"DPR {dpr_val:.1f}%",annotation_position="top right")
-        f.add_vline(x=p50_,line_dash="dot",line_color="#0D6EFD",line_width=2,
-                    annotation_text=f"P50 {p50_:.1f}%",annotation_position="top left")
-        for pv,pn,pc in [(p20_,"P20","#FFC107"),(p80_,"P80","#198754")]:
-            f.add_vline(x=pv,line_dash="longdash",line_color=pc,line_width=1.2)
-        if dpr_val and dpr_val!=p50_:
+            f.add_trace(go.Scatter(x=[dpr_val,dpr_val],y=[0,0],mode="lines",
+                name=f"DPR Stated ({dpr_val:.1f}%)",
+                line=dict(color="#1A202C",width=2.5,dash="solid"),showlegend=True))
+        f.add_trace(go.Scatter(x=[p20_,p20_],y=[0,0],mode="lines",
+            name=f"P20 ({p20_:.1f}%)",
+            line=dict(color="#B7791F",width=1.5,dash="longdash"),showlegend=True))
+        f.add_trace(go.Scatter(x=[p80_,p80_],y=[0,0],mode="lines",
+            name=f"P80 ({p80_:.1f}%)",
+            line=dict(color="#276749",width=1.5,dash="longdash"),showlegend=True))
+
+        # Actual vertical lines — NO annotation_text on any of them (prevents overlap)
+        f.add_vline(x=hurdle_pct,line_dash="dash",line_color="#C53030",line_width=2.5)
+        f.add_vline(x=p50_,line_dash="dot",line_color="#2B6CB0",line_width=2.5)
+        if dpr_val:
+            f.add_vline(x=dpr_val,line_dash="solid",line_color="#1A202C",line_width=2.5)
+        f.add_vline(x=p20_,line_dash="longdash",line_color="#B7791F",line_width=1.5)
+        f.add_vline(x=p80_,line_dash="longdash",line_color="#276749",line_width=1.5)
+
+        # Bias gap annotation — placed below the bars at y=paper 0.04, not top
+        if dpr_val and abs(dpr_val-p50_)>0.2:
             bias=dpr_val-p50_
-            f.add_annotation(x=(dpr_val+p50_)/2,y=0,xref="x",yref="paper",
-                              text=f"Bias\n{bias:+.1f}pp",showarrow=False,
-                              font=dict(size=10,color="#842029"),bgcolor="white",
-                              bordercolor="#842029",borderwidth=1.5,borderpad=4)
-        f.add_annotation(text=f"<b>FI = {fi_v:.1f}%</b><br>{_vt(fi_v)}",
-                         xref="paper",yref="paper",x=0.02,y=0.96,showarrow=False,
-                         bgcolor=_bg(fi_v),bordercolor=_fc(fi_v),borderwidth=1.5,borderpad=5,
-                         font=dict(size=11,color=_fc(fi_v)))
-        f.update_layout(title=f"<b>{title}</b>",height=410,plot_bgcolor="white",paper_bgcolor="white",font=dict(family="Inter, sans-serif", size=13, color="#1A202C"),
-                        bargap=0.04,showlegend=False,
-                        xaxis=dict(title="IRR (%)",gridcolor="#EEEEEE"),
-                        yaxis=dict(title="Frequency",gridcolor="#EEEEEE"),
-                        margin=dict(l=50,r=50,t=50,b=40))
+            f.add_annotation(x=(dpr_val+p50_)/2,y=0.08,xref="x",yref="paper",
+                              text=f"<b>Bias {bias:+.1f}pp</b>",showarrow=True,
+                              arrowhead=2,arrowcolor="#C53030",arrowwidth=1.5,
+                              ax=0,ay=30,
+                              font=dict(size=12,color="#C53030"),
+                              bgcolor="rgba(255,255,255,0.9)",
+                              bordercolor="#C53030",borderwidth=1.5,borderpad=4)
+
+        # "Below hurdle" text — placed at fixed paper position, not auto
+        f.add_annotation(text="← Below hurdle zone",
+                         xref="paper",yref="paper",x=0.01,y=0.92,showarrow=False,
+                         font=dict(size=11,color="#C53030"),align="left")
+
+        # FI badge — top right, away from all other annotations
+        verdict_label = "✓ APPROVE" if fi_v<25 else "⚠ CONDITIONAL" if fi_v<50 else "✕ RETURN DPR"
+        f.add_annotation(text=f"<b>FI = {fi_v:.1f}%</b><br>{_vt(fi_v)}<br>{verdict_label}",
+                         xref="paper",yref="paper",x=0.98,y=0.97,showarrow=False,
+                         xanchor="right",yanchor="top",
+                         bgcolor=_bg(fi_v),bordercolor=_fc(fi_v),borderwidth=2,borderpad=8,
+                         font=dict(size=13,color=_fc(fi_v)))
+
+        f.update_layout(
+            title=dict(text=f"<b>{title}</b>",font=dict(size=15)),
+            height=430,
+            plot_bgcolor="white",paper_bgcolor="white",
+            font=dict(family="Inter, sans-serif",size=14,color="#1A202C"),
+            bargap=0.04,
+            showlegend=True,
+            legend=dict(
+                orientation="h",
+                yanchor="bottom",y=-0.28,
+                xanchor="center",x=0.5,
+                font=dict(size=12),
+                bgcolor="rgba(255,255,255,0.95)",
+                bordercolor="#DEE2E6",borderwidth=1,
+                traceorder="normal",
+            ),
+            xaxis=dict(title="IRR (%)",gridcolor="#EEEEEE",title_font_size=13,tickfont_size=12),
+            yaxis=dict(title="Frequency",gridcolor="#EEEEEE",title_font_size=13,tickfont_size=12),
+            margin=dict(l=55,r=55,t=55,b=100),
+        )
         return f
+
+    # Line colour legend card
+    st.markdown("""<div style='background:#F7FAFC;border:1.5px solid #DEE2E6;border-radius:10px;padding:14px 20px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;'>
+    <span style='font-weight:700;font-size:0.95rem;color:#1A202C;'>HOW TO READ THESE CHARTS:</span>
+    <span style='font-size:0.9rem;'><span style='color:#C53030;font-weight:700;'>━━ Red dashed</span> = Approval hurdle (EIRR must exceed this)</span>
+    <span style='font-size:0.9rem;'><span style='color:#2B6CB0;font-weight:700;'>┄┄ Blue dotted</span> = P50 (median realistic outcome from 10,000 runs)</span>
+    <span style='font-size:0.9rem;'><span style='color:#1A202C;font-weight:700;'>── Black solid</span> = DPR stated value (consultant's claim)</span>
+    <span style='font-size:0.9rem;'><span style='color:#B7791F;font-weight:700;'>╌╌ Amber</span> = P20 (pessimistic 20th percentile)</span>
+    <span style='font-size:0.9rem;'><span style='color:#276749;font-weight:700;'>╌╌ Green</span> = P80 (optimistic 80th percentile)</span>
+    <span style='font-size:0.9rem;'>🟥 Red zone = outcomes below the approval hurdle (these count toward FI%)</span>
+    </div>""", unsafe_allow_html=True)
 
     c1,c2,c3=st.columns(3)
     with c1: st.plotly_chart(_hist(res["eirr_arr"],HURDLES["EIRR"],"#17A589","EIRR — Society's View (12% hurdle)",p["dpr_eirr"]),use_container_width=True)
-    with c2: st.plotly_chart(_hist(res["firr_arr"] if not np.all(np.isnan(res["firr_arr"])) else None,
-                                    HURDLES["FIRR"],"#8E44AD","FIRR — Lender's View (10% hurdle)",p.get("dpr_firr")),use_container_width=True)
+    with c2:
+        firr_data = res["firr_arr"] if not np.all(np.isnan(res["firr_arr"])) else None
+        if firr_data is None:
+            st.markdown(f"""<div style='background:#FFFBEB;border:1.5px solid #B7791F;border-radius:10px;
+            padding:20px;margin-top:10px;text-align:center;'>
+            <div style='font-size:1.3rem;font-weight:800;color:#B7791F;margin-bottom:8px;'>FIRR — Lender's View</div>
+            <div style='font-size:2.5rem;font-weight:800;color:#718096;'>N/A</div>
+            <div style='font-size:1rem;color:#2D3748;margin-top:8px;'>FIRR is not computed for <b>{sim_mode}</b> mode</div>
+            <div style='font-size:0.9rem;color:#4A5568;margin-top:6px;'>
+            FIRR applies only to <b>HAM</b> and <b>BOT</b> modes where a private concessionaire 
+            takes on project financing risk.<br>In <b>EPC</b>, NHAI bears all cost — there is no 
+            concessionaire financial return to assess.<br><br>
+            → Switch to <b>HAM or BOT</b> in the sidebar to see FIRR fragility.
+            </div></div>""", unsafe_allow_html=True)
+        else:
+            st.plotly_chart(_hist(firr_data,HURDLES["FIRR"],"#8E44AD","FIRR — Lender's View (10% hurdle)",p.get("dpr_firr")),use_container_width=True)
     with c3:
-        eq_h_v=res.get("hurdle_eq") or HURDLES["EQ_BOT"]
-        st.plotly_chart(_hist(res["eq_arr"] if not np.all(np.isnan(res["eq_arr"])) else None,
-                               eq_h_v,"#2471A3",f"Equity IRR — Concessionaire ({eq_h_v*100:.0f}% hurdle)",p.get("dpr_eq")),use_container_width=True)
+        eq_h_v = res.get("hurdle_eq") or HURDLES["EQ_BOT"]
+        eq_arr_valid = not np.all(np.isnan(res["eq_arr"]))
+        if not eq_arr_valid:
+            st.markdown(f"""<div style='background:#EBF8FF;border:1.5px solid #2B6CB0;border-radius:10px;
+            padding:20px;margin-top:10px;text-align:center;'>
+            <div style='font-size:1.3rem;font-weight:800;color:#2B6CB0;margin-bottom:8px;'>Equity IRR — Concessionaire</div>
+            <div style='font-size:2.5rem;font-weight:800;color:#718096;'>N/A</div>
+            <div style='font-size:1rem;color:#2D3748;margin-top:8px;'>Equity IRR is not computed for <b>{sim_mode}</b> mode</div>
+            <div style='font-size:0.9rem;color:#4A5568;margin-top:6px;'>
+            Equity IRR applies only to <b>BOT</b> mode where the concessionaire invests equity 
+            and earns returns from toll collection.<br>In <b>EPC</b> and <b>HAM</b>, NHAI pays the contractor — 
+            there is no equity-at-risk structure.<br><br>
+            → Switch to <b>BOT</b> in the sidebar to see Equity IRR fragility.
+            </div></div>""", unsafe_allow_html=True)
+        else:
+            st.plotly_chart(_hist(res["eq_arr"], eq_h_v,"#2471A3",
+                f"Equity IRR — Concessionaire ({eq_h_v*100:.0f}% hurdle)",p.get("dpr_eq")),
+                use_container_width=True)
 
-    st.markdown("""<div class='note'>
-    <b>Reading these charts:</b> Each bar = frequency of that IRR in 5,000 simulations.
-    The <b>black solid line</b> = DPR's stated value (consultant's inside view).
-    The <b>blue dotted line</b> = P50 simulated (PFFF's outside view).
-    The gap between them = <b>Optimism Bias</b>.
-    Red shaded zone = failure region.
+    st.markdown(f"""<div class='note'>
+    <b>How to interpret the Fragility Index:</b>
+    FI% = the percentage of {n_iter:,} simulated scenarios where the IRR falls below its hurdle rate.
+    A FI of <b>51%</b> means that in more than half of all realistic scenarios, the project fails its economic 
+    return criterion. <b>This is what NHAI cannot see from a deterministic DPR alone.</b>
+    The bias gap (DPR stated minus P50 simulated) reveals the systematic overstatement in the consultant's DPR.
     </div>""", unsafe_allow_html=True)
 
     # Percentile table
